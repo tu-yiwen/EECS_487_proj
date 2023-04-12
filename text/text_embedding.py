@@ -33,18 +33,21 @@ def cosine_similarity(a, b):
 # Note: this function is not used in fine-tuning. It's used in general training dataloader
 class dataloader(Dataset):
     """Generate data loader."""
-    def __init__(self, train):
+    def __init__(self, train,file1,file2):
         super().__init__()
+        image_embedding = torch.load(file1)
+        text_embedding = torch.load(file2)
         self.items = []
-        train['humour'].map({'funny': 1, 'not_funny': 0})
-        train['sarcastic'].map({'sarcastic': 2, 'little_sarcastic': 1, 'not_sarcastic': 0})
-        train['offensive'].map({'offensive': 2, 'slight': 1, 'not_offensive': 0})
-        train['motivational'].map({'motivational': 1, 'not_motivational': 0})
-        train['overall_sentiment'].map({'positive': 1, 'negative': -1, 'neutral': 0})
+        train['humour'] = train['humour'].map({'hilarious': 3, 'very_funny':2, 'funny': 1, 'not_funny': 0})
+        train['sarcastic'] = train['sarcastic'].map({'extremely_sarcastic':3, 'very_sarcastic': 2, 'little_sarcastic': 1, 'not_sarcastic': 0})
+        train['offensive'] = train['offensive'].map({'hateful_offensive':3, 'very_offensive': 2, 'slight': 1, 'not_offensive': 0})
+        train['motivational'] = train['motivational'].map({'motivational': 1, 'not_motivational': 0})
+        train['overall_sentiment'] = train['overall_sentiment'].map({'very_positive':2,'positive': 1, 'very_negative':0, 'negative': 0, 'neutral': 1})
         for index, row in train.iterrows():
             self.items.append({
-                'text_corrected': row['ocr_text'],
-                'rating': [row['humour'], row['sarcastic'], row['offensive'], row['motivational'], row['overall_sentiment']],
+                'text': text_embedding[index],
+                'image_embedding': image_embedding[index].squeeze(),
+                'rating': [row['humour'],row['sarcastic'],row['offensive'],row['motivational'],row['overall_sentiment']]
             })
     
     def __len__(self):
