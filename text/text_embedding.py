@@ -35,10 +35,6 @@ class dataloader(Dataset):
     """Generate data loader."""
     def __init__(self, train):
         super().__init__()
-        model = Finetuner()
-        model.load_state_dict(torch.load('text/roberta_ft1.pt'))
-        model.eval()
-        image_embedding = torch.load('image/VGG_basic.pt')
         self.items = []
         train['humour'].map({'funny': 1, 'not_funny': 0})
         train['sarcastic'].map({'sarcastic': 2, 'little_sarcastic': 1, 'not_sarcastic': 0})
@@ -47,8 +43,7 @@ class dataloader(Dataset):
         train['overall_sentiment'].map({'positive': 1, 'negative': -1, 'neutral': 0})
         for index, row in train.iterrows():
             self.items.append({
-                'text_embedding': model.forward(row['ocr_text']),
-                'image_embedding': image_embedding[index],
+                'text_corrected': row['ocr_text'],
                 'rating': [row['humour'], row['sarcastic'], row['offensive'], row['motivational'], row['overall_sentiment']],
             })
     
