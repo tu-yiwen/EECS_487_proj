@@ -1,8 +1,11 @@
-# EECS_487_proj
+# Meme Humour Classification: Attention-based Multi-modal Fusion with Humour Theory
+
+Course Project of EECS487
+
 Member: Yiwen Tu, Xiao Wei, Bohan Shu
 
 # Things to notice:
-You may need embeddings to run the code. The text embedding is available through (they're too big to upload to github)
+You may need embeddings to run the code. The text embedding (fine-tuned roberta) is available through the following links (they're too big to upload to github)
 
 train_embedding: https://drive.google.com/file/d/1TtiGNhk-Gqw4PBmqGbYHyN3IvDh10tCC/view?usp=share_link
 
