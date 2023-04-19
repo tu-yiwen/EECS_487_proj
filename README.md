@@ -9,3 +9,5 @@ train_embedding: https://drive.google.com/file/d/1TtiGNhk-Gqw4PBmqGbYHyN3IvDh10t
 val_embedding: https://drive.google.com/file/d/1-1KqBdfi0wAmkM7Wq3wEe6CMNywNQiXS/view?usp=share_link 
 
 test_embedding: https://drive.google.com/file/d/1-4eCmQOtTlJbmtEmeRofQDEbFSMyl2zC/view?usp=share_link
+
+The final notebook file is meme_result.ipynb, you may need to configure the file locations to run the notebook. Sorry for the inconvenience~
